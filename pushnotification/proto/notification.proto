@@ -1,0 +1,53 @@
+syntax = "proto3";
+
+package account;
+import "google/protobuf/empty.proto";
+
+service NotificationController {
+    rpc CreateNotification(NotificationRequest) returns (Notification) {}
+    rpc CreateNotificationType(NotificationTypeRequest) returns (NotificationType) {}
+    rpc UpdateNotification(NotificationRequest) returns (Notification) {}
+    rpc DestroyNotification(NotificationRetrieveRequest) returns (google.protobuf.Empty) {}
+}
+
+message Login{
+    string name = 1;
+    string password = 2;
+}
+
+message NotificationType {
+    int32 id = 1;
+    string name = 2;
+    string icon = 3;
+    int32 priority = 4;
+    int32 webserver = 5;
+}
+
+message Notification {
+    int32 id = 1;
+    string text = 2;
+    string created_date = 3;
+    string sender_name = 4;
+    string icon_URL = 5;
+    int32 receiver = 6;
+    int32 notification_type = 7;
+}
+
+message NotificationId{
+    int32 id = 1;
+}
+
+message NotificationRequest {
+    Login login = 1;
+    Notification notification = 2;
+}
+
+message NotificationTypeRequest {
+    Login login = 1;
+    NotificationType notification_type = 2;
+}
+
+message NotificationRetrieveRequest {
+    Login login = 1;
+    NotificationId notification = 2;
+}
