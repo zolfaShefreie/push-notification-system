@@ -1,0 +1,45 @@
+syntax = "proto3";
+
+package account;
+import "google/protobuf/empty.proto";
+
+service WebServerUserController {
+    rpc RegisterWebServer(WebServer) returns (WebServer){}
+    rpc DeleteWebServer(WebServer) returns (google.protobuf.Empty) {}
+    rpc AddUser(UserRequest) returns (User) {}
+    rpc RetrieveUser(UserRetrieveRequest) returns (User) {}
+    rpc DestroyUser(UserRequest) returns (google.protobuf.Empty) {}
+}
+
+message WebServer {
+    string name = 2;
+    string password = 3;
+    string URLAddress = 4;
+}
+
+message Login{
+    string name = 1;
+    string password = 2;
+}
+
+message User {
+    int32 id = 1;
+    int32 webserver = 2;
+    string token = 3;
+}
+
+message UserRequest {
+    Login login = 1;
+    User user = 2;
+}
+
+message UserId {
+    int32 id = 1;
+}
+
+message UserRetrieveRequest{
+    Login login = 1;
+    UserId user = 2;
+}
+
+
