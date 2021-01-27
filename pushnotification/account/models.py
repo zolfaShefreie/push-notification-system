@@ -12,6 +12,8 @@ class WebServer(models.Model):
 class User(AbstractBaseUser):
     webserver = models.ForeignKey(WebServer, on_delete=models.CASCADE)
     USERNAME_FIELD = 'id'
+    last_login = None
+    password = None
 
     class Meta:
         index_together = [
