@@ -37,6 +37,9 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'rest_framework.authtoken',
+    'account',
+    'notification',
 ]
 
 MIDDLEWARE = [
@@ -66,6 +69,10 @@ TEMPLATES = [
         },
     },
 ]
+
+# Custom_user
+AUTH_USER_MODEL = 'accounts.User'
+
 
 WSGI_APPLICATION = 'pushnotification.wsgi.application'
 
