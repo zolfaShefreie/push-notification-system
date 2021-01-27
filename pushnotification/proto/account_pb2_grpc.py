@@ -37,7 +37,7 @@ class WebServerUserControllerStub(object):
                 )
         self.DestroyUser = channel.unary_unary(
                 '/account.WebServerUserController/DestroyUser',
-                request_serializer=proto_dot_account__pb2.UserRequest.SerializeToString,
+                request_serializer=proto_dot_account__pb2.UserRetrieveRequest.SerializeToString,
                 response_deserializer=google_dot_protobuf_dot_empty__pb2.Empty.FromString,
                 )
 
@@ -100,7 +100,7 @@ def add_WebServerUserControllerServicer_to_server(servicer, server):
             ),
             'DestroyUser': grpc.unary_unary_rpc_method_handler(
                     servicer.DestroyUser,
-                    request_deserializer=proto_dot_account__pb2.UserRequest.FromString,
+                    request_deserializer=proto_dot_account__pb2.UserRetrieveRequest.FromString,
                     response_serializer=google_dot_protobuf_dot_empty__pb2.Empty.SerializeToString,
             ),
     }
@@ -193,7 +193,7 @@ class WebServerUserController(object):
             timeout=None,
             metadata=None):
         return grpc.experimental.unary_unary(request, target, '/account.WebServerUserController/DestroyUser',
-            proto_dot_account__pb2.UserRequest.SerializeToString,
+            proto_dot_account__pb2.UserRetrieveRequest.SerializeToString,
             google_dot_protobuf_dot_empty__pb2.Empty.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)

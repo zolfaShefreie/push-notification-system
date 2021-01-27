@@ -8,7 +8,7 @@ service WebServerUserController {
     rpc DeleteWebServer(WebServer) returns (google.protobuf.Empty) {}
     rpc AddUser(UserRequest) returns (User) {}
     rpc RetrieveUser(UserRetrieveRequest) returns (User) {}
-    rpc DestroyUser(UserRequest) returns (google.protobuf.Empty) {}
+    rpc DestroyUser(UserRetrieveRequest) returns (google.protobuf.Empty) {}
 }
 
 message WebServer {

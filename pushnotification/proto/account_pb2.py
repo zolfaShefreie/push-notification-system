@@ -20,7 +20,7 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   syntax='proto3',
   serialized_options=None,
   create_key=_descriptor._internal_create_key,
-  serialized_pb=b'\n\x13proto/account.proto\x12\x07\x61\x63\x63ount\x1a\x1bgoogle/protobuf/empty.proto\"?\n\tWebServer\x12\x0c\n\x04name\x18\x02 \x01(\t\x12\x10\n\x08password\x18\x03 \x01(\t\x12\x12\n\nURLAddress\x18\x04 \x01(\t\"\'\n\x05Login\x12\x0c\n\x04name\x18\x01 \x01(\t\x12\x10\n\x08password\x18\x02 \x01(\t\"4\n\x04User\x12\n\n\x02id\x18\x01 \x01(\x05\x12\x11\n\twebserver\x18\x02 \x01(\x05\x12\r\n\x05token\x18\x03 \x01(\t\"I\n\x0bUserRequest\x12\x1d\n\x05login\x18\x01 \x01(\x0b\x32\x0e.account.Login\x12\x1b\n\x04user\x18\x02 \x01(\x0b\x32\r.account.User\"\x14\n\x06UserId\x12\n\n\x02id\x18\x01 \x01(\x05\"S\n\x13UserRetrieveRequest\x12\x1d\n\x05login\x18\x01 \x01(\x0b\x32\x0e.account.Login\x12\x1d\n\x04user\x18\x02 \x01(\x0b\x32\x0f.account.UserId2\xc9\x02\n\x17WebServerUserController\x12=\n\x11RegisterWebServer\x12\x12.account.WebServer\x1a\x12.account.WebServer\"\x00\x12?\n\x0f\x44\x65leteWebServer\x12\x12.account.WebServer\x1a\x16.google.protobuf.Empty\"\x00\x12\x30\n\x07\x41\x64\x64User\x12\x14.account.UserRequest\x1a\r.account.User\"\x00\x12=\n\x0cRetrieveUser\x12\x1c.account.UserRetrieveRequest\x1a\r.account.User\"\x00\x12=\n\x0b\x44\x65stroyUser\x12\x14.account.UserRequest\x1a\x16.google.protobuf.Empty\"\x00\x62\x06proto3'
+  serialized_pb=b'\n\x13proto/account.proto\x12\x07\x61\x63\x63ount\x1a\x1bgoogle/protobuf/empty.proto\"?\n\tWebServer\x12\x0c\n\x04name\x18\x02 \x01(\t\x12\x10\n\x08password\x18\x03 \x01(\t\x12\x12\n\nURLAddress\x18\x04 \x01(\t\"\'\n\x05Login\x12\x0c\n\x04name\x18\x01 \x01(\t\x12\x10\n\x08password\x18\x02 \x01(\t\"4\n\x04User\x12\n\n\x02id\x18\x01 \x01(\x05\x12\x11\n\twebserver\x18\x02 \x01(\x05\x12\r\n\x05token\x18\x03 \x01(\t\"I\n\x0bUserRequest\x12\x1d\n\x05login\x18\x01 \x01(\x0b\x32\x0e.account.Login\x12\x1b\n\x04user\x18\x02 \x01(\x0b\x32\r.account.User\"\x14\n\x06UserId\x12\n\n\x02id\x18\x01 \x01(\x05\"S\n\x13UserRetrieveRequest\x12\x1d\n\x05login\x18\x01 \x01(\x0b\x32\x0e.account.Login\x12\x1d\n\x04user\x18\x02 \x01(\x0b\x32\x0f.account.UserId2\xd1\x02\n\x17WebServerUserController\x12=\n\x11RegisterWebServer\x12\x12.account.WebServer\x1a\x12.account.WebServer\"\x00\x12?\n\x0f\x44\x65leteWebServer\x12\x12.account.WebServer\x1a\x16.google.protobuf.Empty\"\x00\x12\x30\n\x07\x41\x64\x64User\x12\x14.account.UserRequest\x1a\r.account.User\"\x00\x12=\n\x0cRetrieveUser\x12\x1c.account.UserRetrieveRequest\x1a\r.account.User\"\x00\x12\x45\n\x0b\x44\x65stroyUser\x12\x1c.account.UserRetrieveRequest\x1a\x16.google.protobuf.Empty\"\x00\x62\x06proto3'
   ,
   dependencies=[google_dot_protobuf_dot_empty__pb2.DESCRIPTOR,])
 
@@ -331,7 +331,7 @@ _WEBSERVERUSERCONTROLLER = _descriptor.ServiceDescriptor(
   serialized_options=None,
   create_key=_descriptor._internal_create_key,
   serialized_start=404,
-  serialized_end=733,
+  serialized_end=741,
   methods=[
   _descriptor.MethodDescriptor(
     name='RegisterWebServer',
@@ -378,7 +378,7 @@ _WEBSERVERUSERCONTROLLER = _descriptor.ServiceDescriptor(
     full_name='account.WebServerUserController.DestroyUser',
     index=4,
     containing_service=None,
-    input_type=_USERREQUEST,
+    input_type=_USERRETRIEVEREQUEST,
     output_type=google_dot_protobuf_dot_empty__pb2._EMPTY,
     serialized_options=None,
     create_key=_descriptor._internal_create_key,
