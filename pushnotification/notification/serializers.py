@@ -12,6 +12,11 @@ class NotificationSerializer(proto_serializers.ModelProtoSerializer):
         proto_class = notification_pb2.Notification
         fields = ["id", "text", "created_date", "sender_name", "icon_URL", "receiver", "notification_type"]
 
+    def update(self, instance, validated_data):
+        instance.text = validated_data.get('text', instance.text)
+        instance.save()
+        return instance
+
 
 class NotificationTypeSerializer(proto_serializers.ModelProtoSerializer):
 
