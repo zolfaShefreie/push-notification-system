@@ -12,7 +12,6 @@ from google.protobuf import empty_pb2
 class NotificaionServicer(services.Service):
 
     def CreateNotification(self, request, context):
-        print(request)
         web = login(request.login.name, request.login.password)
         if web is None:
             self.context.abort(grpc.StatusCode.PERMISSION_DENIED, "LOGIN FAILED")
