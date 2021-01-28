@@ -1,4 +1,5 @@
 from django_grpc_framework import services
+from google.protobuf import empty_pb2
 import grpc
 
 from .models import User, WebServer
@@ -22,7 +23,7 @@ class WebServerUserService(services.Service):
         web = login(request.login.name, request.login.password)
         if web is None:
             self.context.abort(
-                grpc.StatusCode.PERMISSION_DENIED, "PERMISSION_DENIED")
+                grpc.StatusCode.PERMISSION_DENIED, "LOGIN FAILED")
         try:
             instance = WebServer.objects.get(name=request.WebServer.name)
         except:
@@ -43,7 +44,7 @@ class WebServerUserService(services.Service):
         web = login(request.login.name, request.login.password)
         if web is None:
             self.context.abort(
-                grpc.StatusCode.PERMISSION_DENIED, "PERMISSION_DENIED")
+                grpc.StatusCode.PERMISSION_DENIED, "LOGIN FAILED")
         if web.id != request.user.webserver:
             self.context.abort(
                 grpc.StatusCode.PERMISSION_DENIED, "PERMISSION_DENIED")
@@ -57,7 +58,7 @@ class WebServerUserService(services.Service):
         web = login(request.login.name, request.login.password)
         if web is None:
             self.context.abort(
-                grpc.StatusCode.PERMISSION_DENIED, "PERMISSION_DENIED")
+                grpc.StatusCode.PERMISSION_DENIED, "LOGIN FAILED")
         try:
             user = User.objects.get(pk=request.user.id)
         except:
@@ -75,8 +76,7 @@ class WebServerUserService(services.Service):
         web = login(request.login.name, request.login.password)
         if web is None:
             self.context.abort(
-                grpc.StatusCode.PERMISSION_DENIED, "PERMISSION_DENIED")
-
+                grpc.StatusCode.PERMISSION_DENIED, "LOGIN FAILED")
         try:
             user = User.objects.get(pk=request.user.id)
         except:
