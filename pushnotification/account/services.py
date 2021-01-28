@@ -7,7 +7,7 @@ from .utility import login
 from proto import account_pb2_grpc, account_pb2
 
 
-class WebServerService(services.Service):
+class WebServerUserService(services.Service):
 
     def RegisterWebServer(self, request, context):
         serializer = WebServerSrializer(message=request)
@@ -35,9 +35,6 @@ class WebServerService(services.Service):
 
     def perform_destroy(self, instance):
         instance.delete()
-    
-
-class UserService(services.Service):
 
     def AddUser(self, request, context):
         web = login(request.login.name, request.login.password)
@@ -50,10 +47,6 @@ class UserService(services.Service):
         serializer.is_valid(raise_exception=True)
         self.perform_create(serializer)
         return serializer.message
-    
-    def perform_create(self, serializer):
-        serializer.save()
-        
 
     def RetrieveUser(self, request, context):
         web = login(request.login.name, request.login.password)
@@ -67,7 +60,7 @@ class UserService(services.Service):
 
         if user.webserver.id != web.id:
             self.context.abort(grpc.StatusCode.PERMISSION_DENIED)
-        
+
         serializer = UserSerializer(user)
         return serializer.message
 
@@ -88,6 +81,4 @@ class UserService(services.Service):
         self.perform_destroy(user)
         return empty_pb2.Empty()
 
-    def perform_destroy(self, instance):
-        instance.delete()
     

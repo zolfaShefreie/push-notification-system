@@ -1,4 +1,4 @@
-from django_grpc_framework import proto_serializerss
+from django_grpc_framework import proto_serializers
 from rest_framework import serializers
 from rest_framework.authtoken.models import Token
 
@@ -16,7 +16,7 @@ from proto import account_pb2
 #         pass
 
 
-class WebServerSrializer(proto_serializerss.ModelProtoSerializer):
+class WebServerSrializer(proto_serializers.ModelProtoSerializer):
 
     class Meta:
         model = WebServer
@@ -34,7 +34,7 @@ class WebServerSrializer(proto_serializerss.ModelProtoSerializer):
         return super().data_to_message(data)
 
 
-class UserSerializer(proto_serializerss.ModelProtoSerializer):
+class UserSerializer(proto_serializers.ModelProtoSerializer):
     token = serializers.SerializerMethodField('get_token')
 
     class Meta:
