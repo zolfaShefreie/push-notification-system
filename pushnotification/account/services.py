@@ -21,7 +21,8 @@ class WebServerUserService(services.Service):
     def DeleteWebServer(self, request, context):
         web = login(request.login.name, request.login.password)
         if web is None:
-            self.context.abort(grpc.StatusCode.PERMISSION_DENIED)
+            self.context.abort(
+                grpc.StatusCode.PERMISSION_DENIED, "PERMISSION_DENIED")
         try:
             instance = WebServer.objects.get(name=request.WebServer.name)
         except:
@@ -29,7 +30,8 @@ class WebServerUserService(services.Service):
                                'Webserver:%s not found!' % request.WebServer.name)
 
         if web != instance:
-            self.context.abort(grpc.StatusCode.PERMISSION_DENIED)
+            self.context.abort(
+                grpc.StatusCode.PERMISSION_DENIED, "PERMISSION_DENIED")
 
         self.perform_destroy(instance)
         return empty_pb2.Empty()
@@ -40,9 +42,11 @@ class WebServerUserService(services.Service):
     def AddUser(self, request, context):
         web = login(request.login.name, request.login.password)
         if web is None:
-            self.context.abort(grpc.StatusCode.PERMISSION_DENIED)
+            self.context.abort(
+                grpc.StatusCode.PERMISSION_DENIED, "PERMISSION_DENIED")
         if web.id != request.user.webserver:
-            self.context.abort(grpc.StatusCode.PERMISSION_DENIED)
+            self.context.abort(
+                grpc.StatusCode.PERMISSION_DENIED, "PERMISSION_DENIED")
 
         serializer = UserSerializer(message=request.user)
         serializer.is_valid(raise_exception=True)
@@ -52,7 +56,8 @@ class WebServerUserService(services.Service):
     def RetrieveUser(self, request, context):
         web = login(request.login.name, request.login.password)
         if web is None:
-            self.context.abort(grpc.StatusCode.PERMISSION_DENIED)
+            self.context.abort(
+                grpc.StatusCode.PERMISSION_DENIED, "PERMISSION_DENIED")
         try:
             user = User.objects.get(pk=request.user.id)
         except:
@@ -60,7 +65,8 @@ class WebServerUserService(services.Service):
                                'user:%s not found!' % request.user.id)
 
         if user.webserver.id != web.id:
-            self.context.abort(grpc.StatusCode.PERMISSION_DENIED)
+            self.context.abort(
+                grpc.StatusCode.PERMISSION_DENIED, "PERMISSION_DENIED")
 
         serializer = UserSerializer(user)
         return serializer.message
@@ -68,7 +74,8 @@ class WebServerUserService(services.Service):
     def DestroyUser(self, request, context):
         web = login(request.login.name, request.login.password)
         if web is None:
-            self.context.abort(grpc.StatusCode.PERMISSION_DENIED)
+            self.context.abort(
+                grpc.StatusCode.PERMISSION_DENIED, "PERMISSION_DENIED")
 
         try:
             user = User.objects.get(pk=request.user.id)
@@ -77,7 +84,8 @@ class WebServerUserService(services.Service):
                                'user:%s not found!' % request.user.id)
 
         if user.webserver.id != web.id:
-            self.context.abort(grpc.StatusCode.PERMISSION_DENIED)
+            self.context.abort(
+                grpc.StatusCode.PERMISSION_DENIED, "PERMISSION_DENIED")
 
         self.perform_destroy(user)
         return empty_pb2.Empty()

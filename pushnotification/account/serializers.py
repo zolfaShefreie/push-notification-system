@@ -23,9 +23,6 @@ class WebServerSrializer(proto_serializers.ModelProtoSerializer):
         proto_class = account_pb2.WebServer
         fields = ["id", "name", "email", "password", "URLAddress"]
 
-    # def create(self, validated_data):
-    #     pass
-
     def data_to_message(self, data):
         try:
             data['password'] = ""
@@ -39,10 +36,10 @@ class UserSerializer(proto_serializers.ModelProtoSerializer):
 
     class Meta:
         model = User
-        proto_calss = account_pb2.User
+        proto_class = account_pb2.User
         fields = ['id', 'webserver', 'token']
 
     def get_token(self, obj):
-        token = Token.objects.get_or_create(user=obj)
+        token, create = Token.objects.get_or_create(user=obj)
         return token.key
 
