@@ -12,11 +12,12 @@ from google.protobuf import empty_pb2
 class NotificaionServicer(services.Service):
 
     def CreateNotification(self, request, context):
+        print(request)
         web = login(request.login.name, request.login.password)
         if web is None:
             self.context.abort(grpc.StatusCode.PERMISSION_DENIED, "LOGIN FAILED")
 
-        if not is_owner_user(web, request.receiver) or not is_owner_notif_type(web, request.notification_type):
+        if not is_owner_user(web, request.notification.receiver) or not is_owner_notif_type(web, request.notification.notification_type):
             self.context.abort(grpc.StatusCode.PERMISSION_DENIED, "PERMISSION_DENIED")
         serializer = NotificationSerializer(message=request.notification)
         serializer.is_valid(raise_exception=True)
@@ -54,7 +55,7 @@ class NotificaionServicer(services.Service):
             self.context.abort(grpc.StatusCode.PERMISSION_DENIED, "LOGIN FAILED")
         
         try:
-            notif = Notification.objects.get(request.notification.id)
+            notif = Notification.objects.get(pk=request.notification.id)
         except:
             self.context.abort(grpc.StatusCode.NOT_FOUND, 'notification:%s not found!' % request.notification.id)
         
@@ -66,5 +67,4 @@ class NotificaionServicer(services.Service):
     
     def perform_destroy(self, instance):
         instance.delete()
-    
     
