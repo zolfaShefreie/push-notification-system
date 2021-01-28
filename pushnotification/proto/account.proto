@@ -15,7 +15,8 @@ message WebServer {
     int32 id = 1;
     string name = 2;
     string password = 3;
-    string URLAddress = 4;
+    string email = 4;
+    string URLAddress = 5;
 }
 
 message Login{

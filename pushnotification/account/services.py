@@ -14,10 +14,10 @@ class WebServerUserService(services.Service):
         serializer.is_valid(raise_exception=True)
         self.perform_create(serializer)
         return serializer.message
-    
+
     def perform_create(self, serializer):
         serializer.save()
-    
+
     def DeleteWebServer(self, request, context):
         web = login(request.login.name, request.login.password)
         if web is None:
@@ -25,7 +25,8 @@ class WebServerUserService(services.Service):
         try:
             instance = WebServer.objects.get(name=request.WebServer.name)
         except:
-            self.context.abort(grpc.StatusCode.NOT_FOUND, 'Webserver:%s not found!' % request.WebServer.name)
+            self.context.abort(grpc.StatusCode.NOT_FOUND,
+                               'Webserver:%s not found!' % request.WebServer.name)
 
         if web != instance:
             self.context.abort(grpc.StatusCode.PERMISSION_DENIED)
@@ -80,5 +81,3 @@ class WebServerUserService(services.Service):
 
         self.perform_destroy(user)
         return empty_pb2.Empty()
-
-    

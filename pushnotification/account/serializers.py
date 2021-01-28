@@ -21,7 +21,7 @@ class WebServerSrializer(proto_serializers.ModelProtoSerializer):
     class Meta:
         model = WebServer
         proto_class = account_pb2.WebServer
-        fields = ["id", "name", "password", "URLAddress"]
+        fields = ["id", "name", "email", "password", "URLAddress"]
 
     # def create(self, validated_data):
     #     pass
