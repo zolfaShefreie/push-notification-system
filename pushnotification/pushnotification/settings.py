@@ -108,6 +108,10 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+GRPC_FRAMEWORK = {
+    'ROOT_HANDLERS_HOOK': 'pushnotification.urls.grpc_handlers',
+}
+
 
 # Internationalization
 # https://docs.djangoproject.com/en/3.0/topics/i18n/
