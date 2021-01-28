@@ -16,7 +16,8 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from account.services import WebServerUserService
-from proto import account_pb2_grpc, account_pb2
+from notification.services import NotificaionServicer
+from proto import account_pb2_grpc, account_pb2, notification_pb2, notification_pb2_grpc
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -24,5 +25,5 @@ urlpatterns = [
 
 
 def grpc_handlers(server):
-    account_pb2_grpc.add_WebServerUserControllerServicer_to_server(
-        WebServerUserService.as_servicer(), server)
+    account_pb2_grpc.add_WebServerUserControllerServicer_to_server(WebServerUserService.as_servicer(), server)
+    notification_pb2_grpc.add_NotificationControllerServicer_to_server(NotificaionServicer.as_servicer(), server)

@@ -67,3 +67,4 @@ class NotificaionServicer(services.Service):
     def perform_destroy(self, instance):
         instance.delete()
     
+    
