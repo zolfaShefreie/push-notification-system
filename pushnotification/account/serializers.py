@@ -30,6 +30,13 @@ class WebServerSrializer(proto_serializers.ModelProtoSerializer):
             pass
         return super().data_to_message(data)
 
+    def create(self, validated_data):
+        web = super().create(validated_data)
+        password = validated_data['password']
+        web.set_password(password)
+        web.save()
+        return web
+
 
 class UserSerializer(proto_serializers.ModelProtoSerializer):
     token = serializers.SerializerMethodField('get_token')
