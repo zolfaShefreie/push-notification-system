@@ -3,7 +3,7 @@
 import grpc
 
 from google.protobuf import empty_pb2 as google_dot_protobuf_dot_empty__pb2
-from proto import notification_pb2 as proto_dot_notification__pb2
+import proto.notification_pb2 as notification__pb2
 
 
 class NotificationControllerStub(object):
@@ -17,22 +17,22 @@ class NotificationControllerStub(object):
         """
         self.CreateNotification = channel.unary_unary(
                 '/account.NotificationController/CreateNotification',
-                request_serializer=proto_dot_notification__pb2.NotificationRequest.SerializeToString,
-                response_deserializer=proto_dot_notification__pb2.Notification.FromString,
+                request_serializer=notification__pb2.NotificationRequest.SerializeToString,
+                response_deserializer=notification__pb2.Notification.FromString,
                 )
         self.CreateNotificationType = channel.unary_unary(
                 '/account.NotificationController/CreateNotificationType',
-                request_serializer=proto_dot_notification__pb2.NotificationTypeRequest.SerializeToString,
-                response_deserializer=proto_dot_notification__pb2.NotificationType.FromString,
+                request_serializer=notification__pb2.NotificationTypeRequest.SerializeToString,
+                response_deserializer=notification__pb2.NotificationType.FromString,
                 )
         self.UpdateNotification = channel.unary_unary(
                 '/account.NotificationController/UpdateNotification',
-                request_serializer=proto_dot_notification__pb2.NotificationRequest.SerializeToString,
-                response_deserializer=proto_dot_notification__pb2.Notification.FromString,
+                request_serializer=notification__pb2.NotificationRequest.SerializeToString,
+                response_deserializer=notification__pb2.Notification.FromString,
                 )
         self.DestroyNotification = channel.unary_unary(
                 '/account.NotificationController/DestroyNotification',
-                request_serializer=proto_dot_notification__pb2.NotificationRetrieveRequest.SerializeToString,
+                request_serializer=notification__pb2.NotificationRetrieveRequest.SerializeToString,
                 response_deserializer=google_dot_protobuf_dot_empty__pb2.Empty.FromString,
                 )
 
@@ -69,22 +69,22 @@ def add_NotificationControllerServicer_to_server(servicer, server):
     rpc_method_handlers = {
             'CreateNotification': grpc.unary_unary_rpc_method_handler(
                     servicer.CreateNotification,
-                    request_deserializer=proto_dot_notification__pb2.NotificationRequest.FromString,
-                    response_serializer=proto_dot_notification__pb2.Notification.SerializeToString,
+                    request_deserializer=notification__pb2.NotificationRequest.FromString,
+                    response_serializer=notification__pb2.Notification.SerializeToString,
             ),
             'CreateNotificationType': grpc.unary_unary_rpc_method_handler(
                     servicer.CreateNotificationType,
-                    request_deserializer=proto_dot_notification__pb2.NotificationTypeRequest.FromString,
-                    response_serializer=proto_dot_notification__pb2.NotificationType.SerializeToString,
+                    request_deserializer=notification__pb2.NotificationTypeRequest.FromString,
+                    response_serializer=notification__pb2.NotificationType.SerializeToString,
             ),
             'UpdateNotification': grpc.unary_unary_rpc_method_handler(
                     servicer.UpdateNotification,
-                    request_deserializer=proto_dot_notification__pb2.NotificationRequest.FromString,
-                    response_serializer=proto_dot_notification__pb2.Notification.SerializeToString,
+                    request_deserializer=notification__pb2.NotificationRequest.FromString,
+                    response_serializer=notification__pb2.Notification.SerializeToString,
             ),
             'DestroyNotification': grpc.unary_unary_rpc_method_handler(
                     servicer.DestroyNotification,
-                    request_deserializer=proto_dot_notification__pb2.NotificationRetrieveRequest.FromString,
+                    request_deserializer=notification__pb2.NotificationRetrieveRequest.FromString,
                     response_serializer=google_dot_protobuf_dot_empty__pb2.Empty.SerializeToString,
             ),
     }
@@ -109,8 +109,8 @@ class NotificationController(object):
             timeout=None,
             metadata=None):
         return grpc.experimental.unary_unary(request, target, '/account.NotificationController/CreateNotification',
-            proto_dot_notification__pb2.NotificationRequest.SerializeToString,
-            proto_dot_notification__pb2.Notification.FromString,
+            notification__pb2.NotificationRequest.SerializeToString,
+            notification__pb2.Notification.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
@@ -126,8 +126,8 @@ class NotificationController(object):
             timeout=None,
             metadata=None):
         return grpc.experimental.unary_unary(request, target, '/account.NotificationController/CreateNotificationType',
-            proto_dot_notification__pb2.NotificationTypeRequest.SerializeToString,
-            proto_dot_notification__pb2.NotificationType.FromString,
+            notification__pb2.NotificationTypeRequest.SerializeToString,
+            notification__pb2.NotificationType.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
@@ -143,8 +143,8 @@ class NotificationController(object):
             timeout=None,
             metadata=None):
         return grpc.experimental.unary_unary(request, target, '/account.NotificationController/UpdateNotification',
-            proto_dot_notification__pb2.NotificationRequest.SerializeToString,
-            proto_dot_notification__pb2.Notification.FromString,
+            notification__pb2.NotificationRequest.SerializeToString,
+            notification__pb2.Notification.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
@@ -160,7 +160,7 @@ class NotificationController(object):
             timeout=None,
             metadata=None):
         return grpc.experimental.unary_unary(request, target, '/account.NotificationController/DestroyNotification',
-            proto_dot_notification__pb2.NotificationRetrieveRequest.SerializeToString,
+            notification__pb2.NotificationRetrieveRequest.SerializeToString,
             google_dot_protobuf_dot_empty__pb2.Empty.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
