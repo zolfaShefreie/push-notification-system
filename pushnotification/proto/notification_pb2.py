@@ -21,7 +21,7 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   syntax='proto3',
   serialized_options=None,
   create_key=_descriptor._internal_create_key,
-  serialized_pb=b'\n\x12notification.proto\x12\x07\x61\x63\x63ount\x1a\x1bgoogle/protobuf/empty.proto\x1a\raccount.proto\"_\n\x10NotificationType\x12\n\n\x02id\x18\x01 \x01(\x05\x12\x0c\n\x04name\x18\x02 \x01(\t\x12\x0c\n\x04icon\x18\x03 \x01(\t\x12\x10\n\x08priority\x18\x04 \x01(\x05\x12\x11\n\twebserver\x18\x05 \x01(\x05\"\x92\x01\n\x0cNotification\x12\n\n\x02id\x18\x01 \x01(\x05\x12\x0c\n\x04text\x18\x02 \x01(\t\x12\x14\n\x0c\x63reated_date\x18\x03 \x01(\t\x12\x13\n\x0bsender_name\x18\x04 \x01(\t\x12\x10\n\x08icon_URL\x18\x05 \x01(\t\x12\x10\n\x08receiver\x18\x06 \x01(\x05\x12\x19\n\x11notification_type\x18\x07 \x01(\x05\"\x1c\n\x0eNotificationId\x12\n\n\x02id\x18\x01 \x01(\x05\"a\n\x13NotificationRequest\x12\x1d\n\x05login\x18\x01 \x01(\x0b\x32\x0e.account.Login\x12+\n\x0cnotification\x18\x02 \x01(\x0b\x32\x15.account.Notification\"n\n\x17NotificationTypeRequest\x12\x1d\n\x05login\x18\x01 \x01(\x0b\x32\x0e.account.Login\x12\x34\n\x11notification_type\x18\x02 \x01(\x0b\x32\x19.account.NotificationType\"k\n\x1bNotificationRetrieveRequest\x12\x1d\n\x05login\x18\x01 \x01(\x0b\x32\x0e.account.Login\x12-\n\x0cnotification\x18\x02 \x01(\x0b\x32\x17.account.NotificationId2\xe2\x02\n\x16NotificationController\x12K\n\x12\x43reateNotification\x12\x1c.account.NotificationRequest\x1a\x15.account.Notification\"\x00\x12W\n\x16\x43reateNotificationType\x12 .account.NotificationTypeRequest\x1a\x19.account.NotificationType\"\x00\x12K\n\x12UpdateNotification\x12\x1c.account.NotificationRequest\x1a\x15.account.Notification\"\x00\x12U\n\x13\x44\x65stroyNotification\x12$.account.NotificationRetrieveRequest\x1a\x16.google.protobuf.Empty\"\x00\x62\x06proto3'
+  serialized_pb=b'\n\x12notification.proto\x12\x07\x61\x63\x63ount\x1a\x1bgoogle/protobuf/empty.proto\x1a\raccount.proto\"_\n\x10NotificationType\x12\n\n\x02id\x18\x01 \x01(\x05\x12\x0c\n\x04name\x18\x02 \x01(\t\x12\x0c\n\x04icon\x18\x03 \x01(\t\x12\x10\n\x08priority\x18\x04 \x01(\x05\x12\x11\n\twebserver\x18\x05 \x01(\x05\"\x92\x01\n\x0cNotification\x12\n\n\x02id\x18\x01 \x01(\x05\x12\x0c\n\x04text\x18\x02 \x01(\t\x12\x14\n\x0c\x63reated_date\x18\x03 \x01(\t\x12\x13\n\x0bsender_name\x18\x04 \x01(\t\x12\x10\n\x08icon_URL\x18\x05 \x01(\t\x12\x10\n\x08receiver\x18\x06 \x01(\x05\x12\x19\n\x11notification_type\x18\x07 \x01(\x05\"\x1c\n\x0eNotificationId\x12\n\n\x02id\x18\x01 \x01(\x05\"a\n\x13NotificationRequest\x12\x1d\n\x05login\x18\x01 \x01(\x0b\x32\x0e.account.Login\x12+\n\x0cnotification\x18\x02 \x01(\x0b\x32\x15.account.Notification\"n\n\x17NotificationTypeRequest\x12\x1d\n\x05login\x18\x01 \x01(\x0b\x32\x0e.account.Login\x12\x34\n\x11notification_type\x18\x02 \x01(\x0b\x32\x19.account.NotificationType\"k\n\x1bNotificationRetrieveRequest\x12\x1d\n\x05login\x18\x01 \x01(\x0b\x32\x0e.account.Login\x12-\n\x0cnotification\x18\x02 \x01(\x0b\x32\x17.account.NotificationId2\x95\x02\n\x16NotificationController\x12K\n\x12\x43reateNotification\x12\x1c.account.NotificationRequest\x1a\x15.account.Notification\"\x00\x12W\n\x16\x43reateNotificationType\x12 .account.NotificationTypeRequest\x1a\x19.account.NotificationType\"\x00\x12U\n\x13\x44\x65stroyNotification\x12$.account.NotificationRetrieveRequest\x1a\x16.google.protobuf.Empty\"\x00\x62\x06proto3'
   ,
   dependencies=[google_dot_protobuf_dot_empty__pb2.DESCRIPTOR,account__pb2.DESCRIPTOR,])
 
@@ -376,7 +376,7 @@ _NOTIFICATIONCONTROLLER = _descriptor.ServiceDescriptor(
   serialized_options=None,
   create_key=_descriptor._internal_create_key,
   serialized_start=672,
-  serialized_end=1026,
+  serialized_end=949,
   methods=[
   _descriptor.MethodDescriptor(
     name='CreateNotification',
@@ -399,19 +399,9 @@ _NOTIFICATIONCONTROLLER = _descriptor.ServiceDescriptor(
     create_key=_descriptor._internal_create_key,
   ),
   _descriptor.MethodDescriptor(
-    name='UpdateNotification',
-    full_name='account.NotificationController.UpdateNotification',
-    index=2,
-    containing_service=None,
-    input_type=_NOTIFICATIONREQUEST,
-    output_type=_NOTIFICATION,
-    serialized_options=None,
-    create_key=_descriptor._internal_create_key,
-  ),
-  _descriptor.MethodDescriptor(
     name='DestroyNotification',
     full_name='account.NotificationController.DestroyNotification',
-    index=3,
+    index=2,
     containing_service=None,
     input_type=_NOTIFICATIONRETRIEVEREQUEST,
     output_type=google_dot_protobuf_dot_empty__pb2._EMPTY,

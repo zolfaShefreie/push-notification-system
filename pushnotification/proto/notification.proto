@@ -7,14 +7,9 @@ import "account.proto";
 service NotificationController {
     rpc CreateNotification(NotificationRequest) returns (Notification) {}
     rpc CreateNotificationType(NotificationTypeRequest) returns (NotificationType) {}
-    rpc UpdateNotification(NotificationRequest) returns (Notification) {}
     rpc DestroyNotification(NotificationRetrieveRequest) returns (google.protobuf.Empty) {}
 }
 
-// message Login{
-//     string name = 1;
-//     string password = 2;
-// }
 
 message NotificationType {
     int32 id = 1;

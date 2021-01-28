@@ -25,11 +25,6 @@ class NotificationControllerStub(object):
                 request_serializer=notification__pb2.NotificationTypeRequest.SerializeToString,
                 response_deserializer=notification__pb2.NotificationType.FromString,
                 )
-        self.UpdateNotification = channel.unary_unary(
-                '/account.NotificationController/UpdateNotification',
-                request_serializer=notification__pb2.NotificationRequest.SerializeToString,
-                response_deserializer=notification__pb2.Notification.FromString,
-                )
         self.DestroyNotification = channel.unary_unary(
                 '/account.NotificationController/DestroyNotification',
                 request_serializer=notification__pb2.NotificationRetrieveRequest.SerializeToString,
@@ -47,12 +42,6 @@ class NotificationControllerServicer(object):
         raise NotImplementedError('Method not implemented!')
 
     def CreateNotificationType(self, request, context):
-        """Missing associated documentation comment in .proto file."""
-        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
-        context.set_details('Method not implemented!')
-        raise NotImplementedError('Method not implemented!')
-
-    def UpdateNotification(self, request, context):
         """Missing associated documentation comment in .proto file."""
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
@@ -76,11 +65,6 @@ def add_NotificationControllerServicer_to_server(servicer, server):
                     servicer.CreateNotificationType,
                     request_deserializer=notification__pb2.NotificationTypeRequest.FromString,
                     response_serializer=notification__pb2.NotificationType.SerializeToString,
-            ),
-            'UpdateNotification': grpc.unary_unary_rpc_method_handler(
-                    servicer.UpdateNotification,
-                    request_deserializer=notification__pb2.NotificationRequest.FromString,
-                    response_serializer=notification__pb2.Notification.SerializeToString,
             ),
             'DestroyNotification': grpc.unary_unary_rpc_method_handler(
                     servicer.DestroyNotification,
@@ -128,23 +112,6 @@ class NotificationController(object):
         return grpc.experimental.unary_unary(request, target, '/account.NotificationController/CreateNotificationType',
             notification__pb2.NotificationTypeRequest.SerializeToString,
             notification__pb2.NotificationType.FromString,
-            options, channel_credentials,
-            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
-
-    @staticmethod
-    def UpdateNotification(request,
-            target,
-            options=(),
-            channel_credentials=None,
-            call_credentials=None,
-            insecure=False,
-            compression=None,
-            wait_for_ready=None,
-            timeout=None,
-            metadata=None):
-        return grpc.experimental.unary_unary(request, target, '/account.NotificationController/UpdateNotification',
-            notification__pb2.NotificationRequest.SerializeToString,
-            notification__pb2.Notification.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 

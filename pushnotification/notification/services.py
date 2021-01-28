@@ -37,17 +37,7 @@ class NotificaionServicer(services.Service):
         serializer = NotificationTypeSerializer(message=request.notification_type)
         serializer.is_valid(raise_exception=True)
         self.perform_create(serializer)
-        return serializer.message      
-
-    def UpdateNotification(self, request, context):
-        web = login(request.login.name, request.login.password)
-        if web is None:
-            self.context.abort(grpc.StatusCode.PERMISSION_DENIED, "LOGIN FAILED")
-
-        serializer = NotificationSerializer(message=request.notification, partial=True)
-        serializer.is_valid(raise_exception=True)
-        serializer.save()
-        return serializer.message       
+        return serializer.message            
 
     def DestroyNotification(self, request, context):
         web = login(request.login.name, request.login.password)
