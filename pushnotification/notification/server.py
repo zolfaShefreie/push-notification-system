@@ -3,6 +3,7 @@ import select
 import time
 from .models import Notification
 from .serializers import NotificationSerializer
+from rest_framework.authtoken.models import Token
 
 
 HEADER_LENGTH = 10
@@ -16,7 +17,7 @@ server_socket.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
 server_socket.bind((IP, PORT))
 server_socket.listen()
 
-token = [1, 2, 3, 4]
+# token = [1, 2, 3, 4]
 
 notifs = {}
 
@@ -42,53 +43,60 @@ def receive_message(client_socket):
         return False
 
 
-while True:
+def server():
+    global notifs, sockets_list, clients
+    while True:
 
-    read_sockets, _, exception_sockets = select.select(sockets_list, [], sockets_list)
+        read_sockets, _, exception_sockets = select.select(sockets_list, [], sockets_list)
 
-    # Iterate over notified sockets
-    for notified_socket in read_sockets:
-        if notified_socket == server_socket:
-            client_socket, client_address = server_socket.accept()
-            user = receive_message(client_socket)
+        # Iterate over notified sockets
+        for notified_socket in read_sockets:
+            if notified_socket == server_socket:
+                client_socket, client_address = server_socket.accept()
+                user = receive_message(client_socket)
 
-            # If False - client disconnected before he sent token
-            if user is False:
-                continue
-            sockets_list.append(client_socket)
-            clients[client_socket] = user
+                # If False - client disconnected before he sent token
+                if user is False:
+                    continue
+                sockets_list.append(client_socket)
+                clients[client_socket] = user
 
-            print('Accepted new connection from {}:{}, token: {}'.format(*client_address, user['data'].decode('utf-8')))
+                print('Accepted new connection from {}:{}, token: {}'.format(*client_address, user['data'].decode('utf-8')))
 
-        # Else existing socket is sending a message
-        else:
-            user = clients[notified_socket]
-            t = user['data'].decode('utf-8')
-
-            # XXX FILTER WILL CHANGE XXX
-            notifications = Notification.objects.filter(receiver__id__exact=t)
-            notif_ser = NotificationSerializer(notifs)
-            notifs = notif_ser.data
-
-            if notifs:
-                message = notifs
-                # if message is False:
-                #     print('Closed connection from: {}'.format(clients[notified_socket]['data'].decode('utf-8')))
-                #     sockets_list.remove(notified_socket)
-                #     del clients[notified_socket]
-                #     continue
-                user = clients[notified_socket]
-                print(f'Notifications send to {t}: {message}')
-                hm = (str(message))
-                notified_socket.sendall(hm.encode())
-                Notification.objects.filter(receiver__id__exact=t).delete()
-                notifs = {}
-                break
+            # Else existing socket is sending a message
             else:
-                time.sleep(5)
-                notifications = Notification.objects.filter(receiver__id__exact=t)
+                user = clients[notified_socket]
+                t = user['data'].decode('utf-8')
 
-    # handle some socket exceptions just in case
-    for notified_socket in exception_sockets:
-        sockets_list.remove(notified_socket)
-        del clients[notified_socket]
+                # XXX FILTER WILL CHANGE XXX
+                try:
+                    token_obj = Token.objects.get(key=t)
+                    notifications = Notification.objects.filter(receiver=token_obj.user)
+                    notif_ser = NotificationSerializer(notifs)
+                    notifs = notif_ser.data
+
+                    if notifs:
+                        message = notifs
+                        # if message is False:
+                        #     print('Closed connection from: {}'.format(clients[notified_socket]
+                        #     ['data'].decode('utf-8')))
+                        #     sockets_list.remove(notified_socket)
+                        #     del clients[notified_socket]
+                        #     continue
+                        user = clients[notified_socket]
+                        print(f'Notifications send to {t}: {message}')
+                        hm = (str(message))
+                        notified_socket.sendall(hm.encode())
+                        Notification.objects.filter(receiver__id__exact=t).delete()
+                        notifs = {}
+                        break
+                    else:
+                        time.sleep(5)
+                        # notifications = Notification.objects.filter(receiver__id__exact=t)
+                except:
+                    notified_socket.sendall("You don't have permission".encode())
+
+        # handle some socket exceptions just in case
+        for notified_socket in exception_sockets:
+            sockets_list.remove(notified_socket)
+            del clients[notified_socket]
