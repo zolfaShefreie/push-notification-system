@@ -5,7 +5,7 @@ from .models import Notification, NotificationType
 from proto import notification_pb2
 
 
-class NotificationSerializer(proto_serializers.ModelProtoSerializer):
+class NotificationProtoSerializer(proto_serializers.ModelProtoSerializer):
 
     class Meta:
         model = Notification

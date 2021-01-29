@@ -2,7 +2,7 @@ from django_grpc_framework import services
 import grpc
 
 from .models import Notification, NotificationType
-from .serializers import NotificationSerializer, NotificationTypeSerializer
+from .serializers import NotificationProtoSerializer, NotificationTypeSerializer
 from .utility import is_owner_user, is_owner_notif_type
 from account.models import User, WebServer
 from account.utility import login
@@ -18,7 +18,7 @@ class NotificaionServicer(services.Service):
 
         if not is_owner_user(web, request.notification.receiver) or not is_owner_notif_type(web, request.notification.notification_type):
             self.context.abort(grpc.StatusCode.PERMISSION_DENIED, "PERMISSION_DENIED")
-        serializer = NotificationSerializer(message=request.notification)
+        serializer = NotificationProtoSerializer(message=request.notification)
         serializer.is_valid(raise_exception=True)
         self.perform_create(serializer)
         return serializer.message
