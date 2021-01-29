@@ -1,6 +1,7 @@
-<<<<<<< HEAD
 from rest_framework import serializers
+from proto import notification_pb2
 from .models import Notification, NotificationType
+from django_grpc_framework import proto_serializers
 
 
 class NotificationTypeSerializer(serializers.ModelSerializer):
@@ -15,12 +16,6 @@ class NotificationSerializer(serializers.ModelSerializer):
     class Meta:
         model = Notification
         fields = "__all__"
-=======
-from django_grpc_framework import proto_serializers
-from rest_framework import serializers
-
-from .models import Notification, NotificationType
-from proto import notification_pb2
 
 
 class NotificationProtoSerializer(proto_serializers.ModelProtoSerializer):
@@ -42,4 +37,4 @@ class NotificationTypeProtoSerializer(proto_serializers.ModelProtoSerializer):
         model = NotificationType
         proto_class = notification_pb2.NotificationType
         fields = ["id", "name", "icon", "priority", "webserver"]
->>>>>>> origin/grpc/notification
+
