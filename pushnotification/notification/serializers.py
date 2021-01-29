@@ -18,7 +18,7 @@ class NotificationProtoSerializer(proto_serializers.ModelProtoSerializer):
         return instance
 
 
-class NotificationTypeSerializer(proto_serializers.ModelProtoSerializer):
+class NotificationTypeProtoSerializer(proto_serializers.ModelProtoSerializer):
 
     class Meta:
         model = NotificationType
