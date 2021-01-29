@@ -14,7 +14,7 @@ class Notification(models.Model):
     text = models.TextField()
     created_date = models.DateTimeField(auto_now_add=True, blank=False)
     sender_name = models.CharField(max_length=100)
-    icon_URL = models.URLField()
+    icon_URL = models.URLField(null=True)
     receiver = models.ForeignKey(User, models.CASCADE)
     notification_type = models.ForeignKey(NotificationType, models.CASCADE)
 
