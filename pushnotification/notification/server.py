@@ -95,6 +95,7 @@ def server(request):
                 except Exception as e:
                     # print(str(e))
                     notified_socket.sendall("You don't have permission".encode())
+                    sockets_list.remove(notified_socket)
 
         # handle some socket exceptions just in case
         for notified_socket in exception_sockets:
