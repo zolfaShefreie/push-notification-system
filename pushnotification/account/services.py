@@ -25,10 +25,10 @@ class WebServerUserService(services.Service):
             self.context.abort(
                 grpc.StatusCode.PERMISSION_DENIED, "LOGIN FAILED")
         try:
-            instance = WebServer.objects.get(name=request.WebServer.name)
+            instance = WebServer.objects.get(pk=request.webserver.id)
         except:
             self.context.abort(grpc.StatusCode.NOT_FOUND,
-                               'Webserver:%s not found!' % request.WebServer.name)
+                               'Webserver:%s not found!' % request.webserver.id)
 
         if web != instance:
             self.context.abort(
