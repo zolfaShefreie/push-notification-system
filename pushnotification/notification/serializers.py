@@ -11,11 +11,11 @@ class NotificationTypeSerializer(serializers.ModelSerializer):
 
 
 class NotificationSerializer(serializers.ModelSerializer):
-    notification_type = NotificationTypeSerializer()
+    notification_type = NotificationTypeSerializer(read_only=True)
 
     class Meta:
         model = Notification
-        fields = "__all__"
+        fields = ['id', 'text', 'created_date', 'sender_name', 'icon_URL', 'receiver', 'notification_type']
 
 
 class NotificationProtoSerializer(proto_serializers.ModelProtoSerializer):

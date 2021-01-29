@@ -18,9 +18,11 @@ from django.urls import path
 from account.services import WebServerUserService
 from notification.services import NotificaionServicer
 from proto import account_pb2_grpc, account_pb2, notification_pb2, notification_pb2_grpc
+from notification.server import server
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('', server)
 ]
 
 

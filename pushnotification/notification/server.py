@@ -11,23 +11,14 @@ HEADER_LENGTH = 10
 IP = "127.0.0.1"
 PORT = 1234
 
-# Create a socket
-server_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-server_socket.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
-server_socket.bind((IP, PORT))
-server_socket.listen()
-
-# token = [1, 2, 3, 4]
 
 notifs = {}
 
 # List of sockets for select.select()
-sockets_list = [server_socket]
+sockets_list = []
 
 # List of connected clients - socket as a key, user header and token as data
 clients = {}
-
-print(f'Listening for connections on {IP}:{PORT}...')
 
 
 def receive_message(client_socket):
@@ -43,8 +34,17 @@ def receive_message(client_socket):
         return False
 
 
-def server():
+def server(request):
+    server_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+    server_socket.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
+    server_socket.bind((IP, PORT))
+    server_socket.listen()
+
     global notifs, sockets_list, clients
+
+    sockets_list =[server_socket]
+    print(f'Listening for connections on {IP}:{PORT}...')
+
     while True:
 
         read_sockets, _, exception_sockets = select.select(sockets_list, [], sockets_list)
@@ -68,11 +68,10 @@ def server():
                 user = clients[notified_socket]
                 t = user['data'].decode('utf-8')
 
-                # XXX FILTER WILL CHANGE XXX
                 try:
                     token_obj = Token.objects.get(key=t)
                     notifications = Notification.objects.filter(receiver=token_obj.user)
-                    notif_ser = NotificationSerializer(notifs)
+                    notif_ser = NotificationSerializer(notifications, many=True)
                     notifs = notif_ser.data
 
                     if notifs:
@@ -87,13 +86,14 @@ def server():
                         print(f'Notifications send to {t}: {message}')
                         hm = (str(message))
                         notified_socket.sendall(hm.encode())
-                        Notification.objects.filter(receiver__id__exact=t).delete()
+                        notifications.delete()
                         notifs = {}
                         break
                     else:
                         time.sleep(5)
                         # notifications = Notification.objects.filter(receiver__id__exact=t)
-                except:
+                except Exception as e:
+                    # print(str(e))
                     notified_socket.sendall("You don't have permission".encode())
 
         # handle some socket exceptions just in case

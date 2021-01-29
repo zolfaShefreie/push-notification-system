@@ -44,5 +44,5 @@ while True:
 
     except Exception as e:
         # Any other exception - something happened, exit
-        print('Reading error: '.format(str(e)))
+        print('error: '.format(str(e)))
         sys.exit()
