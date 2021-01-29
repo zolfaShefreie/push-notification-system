@@ -5,21 +5,28 @@ import "google/protobuf/empty.proto";
 
 service WebServerUserController {
     rpc RegisterWebServer(WebServer) returns (WebServer){}
-    rpc DeleteWebServer(WebServer) returns (google.protobuf.Empty) {}
+    rpc DeleteWebServer(WebServerRequest) returns (google.protobuf.Empty) {}
     rpc AddUser(UserRequest) returns (User) {}
     rpc RetrieveUser(UserRetrieveRequest) returns (User) {}
     rpc DestroyUser(UserRetrieveRequest) returns (google.protobuf.Empty) {}
 }
 
 message WebServer {
+    int32 id = 1;
     string name = 2;
     string password = 3;
-    string URLAddress = 4;
+    string email = 4;
+    string URLAddress = 5;
 }
 
 message Login{
     string name = 1;
     string password = 2;
+}
+
+message WebServerRequest {
+    Login login = 1;
+    WebServer webserver = 2;
 }
 
 message User {

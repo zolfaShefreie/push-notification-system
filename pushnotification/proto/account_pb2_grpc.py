@@ -2,8 +2,8 @@
 """Client and server classes corresponding to protobuf-defined services."""
 import grpc
 
+import proto.account_pb2 as account__pb2
 from google.protobuf import empty_pb2 as google_dot_protobuf_dot_empty__pb2
-from proto import account_pb2 as proto_dot_account__pb2
 
 
 class WebServerUserControllerStub(object):
@@ -17,27 +17,27 @@ class WebServerUserControllerStub(object):
         """
         self.RegisterWebServer = channel.unary_unary(
                 '/account.WebServerUserController/RegisterWebServer',
-                request_serializer=proto_dot_account__pb2.WebServer.SerializeToString,
-                response_deserializer=proto_dot_account__pb2.WebServer.FromString,
+                request_serializer=account__pb2.WebServer.SerializeToString,
+                response_deserializer=account__pb2.WebServer.FromString,
                 )
         self.DeleteWebServer = channel.unary_unary(
                 '/account.WebServerUserController/DeleteWebServer',
-                request_serializer=proto_dot_account__pb2.WebServer.SerializeToString,
+                request_serializer=account__pb2.WebServerRequest.SerializeToString,
                 response_deserializer=google_dot_protobuf_dot_empty__pb2.Empty.FromString,
                 )
         self.AddUser = channel.unary_unary(
                 '/account.WebServerUserController/AddUser',
-                request_serializer=proto_dot_account__pb2.UserRequest.SerializeToString,
-                response_deserializer=proto_dot_account__pb2.User.FromString,
+                request_serializer=account__pb2.UserRequest.SerializeToString,
+                response_deserializer=account__pb2.User.FromString,
                 )
         self.RetrieveUser = channel.unary_unary(
                 '/account.WebServerUserController/RetrieveUser',
-                request_serializer=proto_dot_account__pb2.UserRetrieveRequest.SerializeToString,
-                response_deserializer=proto_dot_account__pb2.User.FromString,
+                request_serializer=account__pb2.UserRetrieveRequest.SerializeToString,
+                response_deserializer=account__pb2.User.FromString,
                 )
         self.DestroyUser = channel.unary_unary(
                 '/account.WebServerUserController/DestroyUser',
-                request_serializer=proto_dot_account__pb2.UserRetrieveRequest.SerializeToString,
+                request_serializer=account__pb2.UserRetrieveRequest.SerializeToString,
                 response_deserializer=google_dot_protobuf_dot_empty__pb2.Empty.FromString,
                 )
 
@@ -80,27 +80,27 @@ def add_WebServerUserControllerServicer_to_server(servicer, server):
     rpc_method_handlers = {
             'RegisterWebServer': grpc.unary_unary_rpc_method_handler(
                     servicer.RegisterWebServer,
-                    request_deserializer=proto_dot_account__pb2.WebServer.FromString,
-                    response_serializer=proto_dot_account__pb2.WebServer.SerializeToString,
+                    request_deserializer=account__pb2.WebServer.FromString,
+                    response_serializer=account__pb2.WebServer.SerializeToString,
             ),
             'DeleteWebServer': grpc.unary_unary_rpc_method_handler(
                     servicer.DeleteWebServer,
-                    request_deserializer=proto_dot_account__pb2.WebServer.FromString,
+                    request_deserializer=account__pb2.WebServerRequest.FromString,
                     response_serializer=google_dot_protobuf_dot_empty__pb2.Empty.SerializeToString,
             ),
             'AddUser': grpc.unary_unary_rpc_method_handler(
                     servicer.AddUser,
-                    request_deserializer=proto_dot_account__pb2.UserRequest.FromString,
-                    response_serializer=proto_dot_account__pb2.User.SerializeToString,
+                    request_deserializer=account__pb2.UserRequest.FromString,
+                    response_serializer=account__pb2.User.SerializeToString,
             ),
             'RetrieveUser': grpc.unary_unary_rpc_method_handler(
                     servicer.RetrieveUser,
-                    request_deserializer=proto_dot_account__pb2.UserRetrieveRequest.FromString,
-                    response_serializer=proto_dot_account__pb2.User.SerializeToString,
+                    request_deserializer=account__pb2.UserRetrieveRequest.FromString,
+                    response_serializer=account__pb2.User.SerializeToString,
             ),
             'DestroyUser': grpc.unary_unary_rpc_method_handler(
                     servicer.DestroyUser,
-                    request_deserializer=proto_dot_account__pb2.UserRetrieveRequest.FromString,
+                    request_deserializer=account__pb2.UserRetrieveRequest.FromString,
                     response_serializer=google_dot_protobuf_dot_empty__pb2.Empty.SerializeToString,
             ),
     }
@@ -125,8 +125,8 @@ class WebServerUserController(object):
             timeout=None,
             metadata=None):
         return grpc.experimental.unary_unary(request, target, '/account.WebServerUserController/RegisterWebServer',
-            proto_dot_account__pb2.WebServer.SerializeToString,
-            proto_dot_account__pb2.WebServer.FromString,
+            account__pb2.WebServer.SerializeToString,
+            account__pb2.WebServer.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
@@ -142,7 +142,7 @@ class WebServerUserController(object):
             timeout=None,
             metadata=None):
         return grpc.experimental.unary_unary(request, target, '/account.WebServerUserController/DeleteWebServer',
-            proto_dot_account__pb2.WebServer.SerializeToString,
+            account__pb2.WebServerRequest.SerializeToString,
             google_dot_protobuf_dot_empty__pb2.Empty.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
@@ -159,8 +159,8 @@ class WebServerUserController(object):
             timeout=None,
             metadata=None):
         return grpc.experimental.unary_unary(request, target, '/account.WebServerUserController/AddUser',
-            proto_dot_account__pb2.UserRequest.SerializeToString,
-            proto_dot_account__pb2.User.FromString,
+            account__pb2.UserRequest.SerializeToString,
+            account__pb2.User.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
@@ -176,8 +176,8 @@ class WebServerUserController(object):
             timeout=None,
             metadata=None):
         return grpc.experimental.unary_unary(request, target, '/account.WebServerUserController/RetrieveUser',
-            proto_dot_account__pb2.UserRetrieveRequest.SerializeToString,
-            proto_dot_account__pb2.User.FromString,
+            account__pb2.UserRetrieveRequest.SerializeToString,
+            account__pb2.User.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
@@ -193,7 +193,7 @@ class WebServerUserController(object):
             timeout=None,
             metadata=None):
         return grpc.experimental.unary_unary(request, target, '/account.WebServerUserController/DestroyUser',
-            proto_dot_account__pb2.UserRetrieveRequest.SerializeToString,
+            account__pb2.UserRetrieveRequest.SerializeToString,
             google_dot_protobuf_dot_empty__pb2.Empty.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)

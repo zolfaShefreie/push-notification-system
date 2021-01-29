@@ -20,5 +20,5 @@ class Notification(models.Model):
 
     class Meta:
         index_together = [
-            ["receiver_name_id"],
+            ["receiver_id"],
         ]

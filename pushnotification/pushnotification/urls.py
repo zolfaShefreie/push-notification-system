@@ -15,7 +15,14 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
+from account.services import WebServerUserService
+from proto import account_pb2_grpc, account_pb2
 
 urlpatterns = [
     path('admin/', admin.site.urls),
 ]
+
+
+def grpc_handlers(server):
+    account_pb2_grpc.add_WebServerUserControllerServicer_to_server(
+        WebServerUserService.as_servicer(), server)
